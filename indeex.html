@@ -1,0 +1,2896 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع مثنى - نتائج طلاب تقنيات الحاسوب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary-bg: #0a192f;
+            --secondary-bg: #112240;
+            --accent-color: #64ffda;
+            --text-primary: #ccd6f6;
+            --text-secondary: #8892b0;
+            --card-bg: rgba(17, 34, 64, 0.5);
+            --border-color: rgba(100, 255, 218, 0.2);
+            --danger-color: #ff6b6b;
+            --success-color: #51cf66;
+            --warning-color: #ffd43b;
+        }
+
+        .dark-mode {
+            --primary-bg: #0a192f;
+            --secondary-bg: #112240;
+            --accent-color: #64ffda;
+            --text-primary: #ccd6f6;
+            --text-secondary: #8892b0;
+            --card-bg: rgba(17, 34, 64, 0.5);
+            --border-color: rgba(100, 255, 218, 0.2);
+        }
+
+        .light-mode {
+            --primary-bg: #f0f4f8;
+            --secondary-bg: #ffffff;
+            --accent-color: #2a9d8f;
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --border-color: rgba(42, 157, 143, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+            background-image: linear-gradient(rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.9)), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23123769' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .light-mode body {
+            background-image: linear-gradient(rgba(240, 244, 248, 0.9), rgba(240, 244, 248, 0.9)), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23a7c1d3' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            background: linear-gradient(135deg, var(--card-bg), rgba(21, 38, 63, 0.95));
+            box-shadow: 0 0 40px rgba(0, 217, 255, 0.15);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--border-color);
+        }
+
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 80px;
+            color: rgba(100, 255, 218, 0.03);
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 0;
+            white-space: nowrap;
+            text-shadow: 0 0 15px rgba(100, 255, 218, 0.2);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+            color: var(--text-primary);
+            padding: 25px;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            animation: glow 3s infinite;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+        }
+
+        .header h2 {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .tech-icon {
+            font-size: 24px;
+            margin: 0 10px;
+            color: var(--accent-color);
+        }
+
+        .student-info {
+            padding: 25px;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .student-info::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 5%;
+            left: 5%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .info-label {
+            width: 170px;
+            font-weight: bold;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .info-label i {
+            margin-left: 10px;
+            font-size: 18px;
+        }
+
+        .info-value {
+            flex: 1;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .results-section {
+            padding: 25px;
+        }
+
+        .results-section h3 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--accent-color);
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+            font-size: 22px;
+        }
+
+        .results-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 40%;
+            left: 40%;
+            height: 2px;
+            background: var(--accent-color);
+            box-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .results-table th {
+            background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+            padding: 16px;
+            text-align: right;
+            border: 1px solid var(--border-color);
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .results-table td {
+            padding: 16px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-primary);
+            transition: background 0.3s;
+        }
+
+        .results-table tr:nth-child(even) {
+            background: rgba(17, 34, 64, 0.3);
+        }
+
+        .light-mode .results-table tr:nth-child(even) {
+            background: rgba(240, 240, 240, 0.5);
+        }
+
+        .results-table tr:hover td {
+            background: rgba(100, 255, 218, 0.1);
+        }
+
+        .light-mode .results-table tr:hover td {
+            background: rgba(42, 157, 143, 0.1);
+        }
+
+        .total-row {
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.8), rgba(17, 34, 64, 0.8)) !important;
+            font-weight: bold;
+        }
+
+        .light-mode .total-row {
+            background: linear-gradient(135deg, rgba(240, 244, 248, 0.8), rgba(220, 230, 240, 0.8)) !important;
+        }
+
+        .total-row td {
+            color: var(--accent-color);
+            font-size: 18px;
+        }
+
+        .summary {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+            border-right: 4px solid var(--accent-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .summary h4 {
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .summary h4 i {
+            margin-left: 10px;
+            font-size: 18px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            font-weight: bold;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .summary-label i {
+            margin-left: 8px;
+            color: var(--accent-color);
+        }
+
+        .summary span {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .message {
+            text-align: center;
+            padding: 20px;
+            margin-top: 25px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            border-right: 4px solid var(--accent-color);
+            font-weight: bold;
+            color: var(--text-primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+            color: var(--text-secondary);
+            font-size: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer p:first-child {
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .designer-bar {
+            margin-top: 15px;
+            padding: 10px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            backdrop-filter: blur(5px);
+        }
+
+        .control-btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+            color: var(--text-primary);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+
+        .control-btn:hover {
+            background: linear-gradient(135deg, var(--secondary-bg), var(--primary-bg));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            color: var(--accent-color);
+        }
+
+        .search-container {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin: 0 15px;
+            background: var(--card-bg);
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        #searchInput {
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            width: 220px;
+            direction: ltr;
+            text-align: right;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+        }
+
+        #searchInput::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .student-list {
+            position: absolute;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            max-height: 250px;
+            overflow-y: auto;
+            width: 250px;
+            z-index: 100;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            margin-top: 5px;
+            top: 100%;
+            right: 0;
+        }
+
+        .student-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+            transition: background 0.3s;
+        }
+
+        .student-item:hover {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent-color);
+        }
+
+        .student-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-options {
+            display: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: var(--accent-color);
+        }
+
+        .loading i {
+            animation: spin 1s infinite linear;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            border-right: 4px solid var(--accent-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateX(100%);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        @keyframes glow {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+            color: var(--accent-color);
+        }
+
+        .admin-section {
+            display: none;
+            padding: 25px;
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .admin-header h3 {
+            color: var(--accent-color);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .admin-tabs {
+            display: flex;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .admin-tab.active {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent-color);
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .admin-tab:hover:not(.active) {
+            background: rgba(100, 255, 218, 0.05);
+        }
+
+        .admin-content {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-right: 4px solid var(--accent-color);
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .admin-table th {
+            background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+            padding: 12px;
+            text-align: right;
+            border: 1px solid var(--border-color);
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .admin-table td {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .admin-table tr:nth-child(even) {
+            background: rgba(17, 34, 64, 0.3);
+        }
+
+        .light-mode .admin-table tr:nth-child(even) {
+            background: rgba(240, 240, 240, 0.5);
+        }
+
+        .admin-table tr:hover td {
+            background: rgba(100, 255, 218, 0.1);
+        }
+
+        .light-mode .admin-table tr:hover td {
+            background: rgba(42, 157, 143, 0.1);
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            margin: 0 4px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .edit-btn {
+            background: var(--warning-color);
+            color: #000;
+        }
+
+        .delete-btn {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .add-btn {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .action-btn:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+        }
+
+        .admin-form {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-right: 4px solid var(--accent-color);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 5px rgba(100, 255, 218, 0.3);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .login-section {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-form {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 30px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-right: 4px solid var(--accent-color);
+        }
+
+        .login-form h3 {
+            color: var(--accent-color);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* شعار الترحيب المبسط */
+        .welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 1s ease-out;
+        }
+
+        .welcome-content {
+            text-align: center;
+            color: #64ffda;
+            padding: 40px;
+            border-radius: 15px;
+            background: rgba(17, 34, 64, 0.8);
+            box-shadow: 0 0 40px rgba(100, 255, 218, 0.3);
+            border: 2px solid rgba(100, 255, 218, 0.5);
+            max-width: 80%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(100, 255, 218, 0.1), transparent);
+            animation: shine 3s infinite linear;
+            z-index: -1;
+        }
+
+        .computer-icon {
+            font-size: 80px;
+            color: #64ffda;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(100, 255, 218, 0.5);
+        }
+
+        .welcome-content h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(100, 255, 218, 0.5);
+            color: #64ffda;
+            line-height: 1.4;
+        }
+
+        .welcome-content p {
+            font-size: 20px;
+            color: #ccd6f6;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .loading-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .loading-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(100, 255, 218, 0.2);
+            border-radius: 6px;
+            margin: 30px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loading-progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #64ffda, #4fc9b4);
+            border-radius: 6px;
+            animation: loading 3s ease-in-out;
+            box-shadow: 0 0 10px rgba(100, 255, 218, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading-text {
+            color: #8892b0;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        /* إشعار الترحيب */
+        .welcome-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(17, 34, 64, 0.95);
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border-right: 4px solid #64ffda;
+            transform: translateX(150%);
+            transition: transform 0.5s ease-out;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            max-width: 400px;
+        }
+
+        .welcome-notification.show {
+            transform: translateX(0);
+        }
+
+        .notification-icon {
+            font-size: 30px;
+            color: #64ffda;
+        }
+
+        .notification-content h3 {
+            color: #64ffda;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+
+        .notification-content p {
+            color: #ccd6f6;
+            font-size: 14px;
+        }
+
+        /* قسم الأخبار */
+        .news-section {
+            padding: 25px;
+            background: var(--card-bg);
+            margin: 25px;
+            border-radius: 8px;
+            border-right: 4px solid var(--accent-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .news-section h3 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--accent-color);
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+            font-size: 22px;
+        }
+
+        .news-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 40%;
+            left: 40%;
+            height: 2px;
+            background: var(--accent-color);
+            box-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+        }
+
+        .news-item {
+            background: var(--card-bg);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .news-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .news-item h4 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .news-item p {
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .news-item .news-date {
+            color: var(--text-secondary);
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .no-news {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* أنماط جديدة للمشاركة وحد الكسر */
+        .share-btn {
+            background: linear-gradient(135deg, #1e88e5, #0d47a1);
+            color: white;
+        }
+        
+        .share-btn:hover {
+            background: linear-gradient(135deg, #0d47a1, #1e88e5);
+        }
+        
+        .share-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .share-content {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 30px;
+            width: 500px;
+            max-width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-right: 4px solid var(--accent-color);
+            text-align: center;
+        }
+        
+        .share-options {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .share-option {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 24px;
+            color: white;
+            flex-direction: column;
+        }
+        
+        .share-option.facebook {
+            background: #3b5998;
+        }
+        
+        .share-option.twitter {
+            background: #1da1f2;
+        }
+        
+        .share-option.whatsapp {
+            background: #25d366;
+        }
+        
+        .share-option.download {
+            background: var(--accent-color);
+        }
+        
+        .share-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .share-option span {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        
+        .result-status {
+            display: inline-block;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .status-pass {
+            background: var(--success-color);
+            color: white;
+        }
+        
+        .status-fail {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        /* أنماط الصورة المُنشأة للمشاركة */
+        .result-image-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .result-image {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--accent-color);
+        }
+
+        .image-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @media (max-width: 768px) {
+            .info-row { flex-direction: column; margin-bottom: 15px; align-items: flex-start; }
+            .info-label { width: 100%; margin-bottom: 5px; }
+            .results-table { font-size: 14px; }
+            .header h1 { font-size: 22px; }
+            .header h2 { font-size: 16px; }
+            .controls { flex-direction: column; align-items: center; gap: 15px; }
+            .search-container { width: 100%; justify-content: center; margin-bottom: 10px; }
+            #searchInput { width: 100%; max-width: 250px; }
+            .container { margin: 15px; width: auto; }
+            .theme-toggle { top: 10px; left: 10px; width: 40px; height: 40px; }
+            .admin-tabs { flex-direction: column; }
+            .admin-table { font-size: 14px; }
+            .action-btn { padding: 4px 8px; font-size: 12px; }
+            .welcome-content h1 { font-size: 28px; }
+            .welcome-content p { font-size: 16px; }
+            .computer-icon { font-size: 60px; }
+            .news-section { margin: 15px; }
+            .welcome-notification { right: 10px; left: 10px; max-width: none; }
+            .share-options { flex-wrap: wrap; }
+            .share-option { width: 60px; height: 60px; font-size: 20px; }
+            .share-option span { font-size: 10px; }
+            .image-actions { flex-direction: column; }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--card-bg); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4fc9b4; }
+    </style>
+</head>
+<body class="dark-mode">
+    <!-- شعار الترحيب المبسط -->
+    <div class="welcome-overlay" id="welcomeOverlay">
+        <div class="welcome-content">
+            <div class="computer-icon">
+                <i class="fas fa-laptop-code"></i>
+            </div>
+            
+            <h1>موقع مثنى لنتائج طلاب تقنيات الحاسوب</h1>
+            
+            <p>نظام متكامل لعرض نتائج طلاب تقنيات الحاسوب - محافظة الرقة</p>
+            
+            <div class="loading-container">
+                <div class="loading-bar">
+                    <div class="loading-progress"></div>
+                </div>
+                <div class="loading-text">جاري تحميل الموقع...</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- إشعار الترحيب -->
+    <div class="welcome-notification" id="welcomeNotification">
+        <div class="notification-icon">
+            <i class="fas fa-hand-wave"></i>
+        </div>
+        <div class="notification-content">
+            <h3>مرحباً بك في موقع مثنى 🫡</h3>
+            <p>نظام نتائج طلاب تقنيات الحاسوب - محافظة الرقة</p>
+        </div>
+    </div>
+    
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+    
+    <div class="controls">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="ابحث برقم الاكتتاب">
+            <button class="control-btn" onclick="searchStudent()"><i class="fas fa-search"></i> بحث</button>
+            <div class="student-list" id="studentList"></div>
+        </div>
+        <button class="control-btn" onclick="showResults()"><i class="fas fa-graduation-cap"></i> النتائج</button>
+        <button class="control-btn share-btn" onclick="showShareModal()"><i class="fas fa-share-alt"></i> مشاركة</button>
+        <button class="control-btn" id="adminBtn" onclick="showAdminLogin()"><i class="fas fa-cog"></i> لوحة التحكم</button>
+    </div>
+    
+    <!-- نافذة مشاركة النتيجة -->
+    <div class="share-modal" id="shareModal">
+        <div class="share-content">
+            <h3><i class="fas fa-share-alt"></i> مشاركة النتيجة</h3>
+            <p>اختر طريقة مشاركة نتيجة الطالب:</p>
+            
+            <div class="share-options">
+                <div class="share-option facebook" onclick="shareResult('facebook')">
+                    <i class="fab fa-facebook-f"></i>
+                    <span>فيسبوك</span>
+                </div>
+                <div class="share-option twitter" onclick="shareResult('twitter')">
+                    <i class="fab fa-twitter"></i>
+                    <span>تويتر</span>
+                </div>
+                <div class="share-option whatsapp" onclick="shareResult('whatsapp')">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>واتساب</span>
+                </div>
+                <div class="share-option download" onclick="shareResult('image')">
+                    <i class="fas fa-image"></i>
+                    <span>صورة</span>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button class="control-btn" onclick="hideShareModal()"><i class="fas fa-times"></i> إغلاق</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- عرض الصورة المُنشأة -->
+    <div class="result-image-container" id="resultImageContainer">
+        <img id="resultImage" class="result-image" src="" alt="نتيجة الطالب">
+        <div class="image-actions">
+            <button class="control-btn share-btn" onclick="downloadResultImage()"><i class="fas fa-download"></i> تحميل الصورة</button>
+            <button class="control-btn" onclick="hideResultImage()"><i class="fas fa-times"></i> إغلاق</button>
+        </div>
+    </div>
+    
+    <div class="loading" id="loading">
+        <i class="fas fa-spinner fa-2x"></i>
+        <p>جاري تحميل البيانات...</p>
+    </div>
+    
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText"></span>
+    </div>
+    
+    <!-- نافذة تسجيل الدخول للمسؤول -->
+    <div class="login-section" id="loginSection" style="display: none;">
+        <div class="login-form">
+            <h3><i class="fas fa-lock"></i> تسجيل الدخول للمسؤول</h3>
+            <div class="form-group">
+                <label for="adminUsername">اسم المستخدم:</label>
+                <input type="text" id="adminUsername" placeholder="أدخل اسم المستخدم">
+            </div>
+            <div class="form-group">
+                <label for="adminPassword">كلمة المرور:</label>
+                <input type="password" id="adminPassword" placeholder="أدخل كلمة المرور">
+            </div>
+            <div class="form-actions">
+                <button class="control-btn" onclick="adminLogin()"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</button>
+                <button class="control-btn" onclick="hideAdminLogin()"><i class="fas fa-times"></i> إلغاء</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="watermark">تقنيات الحاسوب</div>
+        
+        <!-- قسم النتائج -->
+        <div id="resultsPage">
+            <div class="header">
+                <h1 id="mainTitle">
+                    <span class="tech-icon"><i class="fas fa-laptop-code"></i></span>
+                    موقع مثنى لنتائج طلاب تقنيات الحاسوب
+                    <span class="tech-icon"><i class="fas fa-microchip"></i></span>
+                </h1>
+                <h2 id="subTitle">النتائج النهائية للفصل الدراسي الثاني 2024/2025</h2>
+            </div>
+            
+            <!-- قسم الأخبار والمستجدات -->
+            <div class="news-section" id="newsSection">
+                <h3><i class="fas fa-newspaper"></i> آخر الأخبار والمستجدات</h3>
+                <div id="newsContainer">
+                    <!-- سيتم ملؤها بالأخبار من لوحة التحكم -->
+                </div>
+            </div>
+            
+            <div class="student-info">
+                <div class="info-row">
+                    <div class="info-label"><i class="fas fa-user-graduate"></i> الاسم الثلاثي:</div>
+                    <div class="info-value" id="studentName">لم يتم تحميل البيانات</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label"><i class="fas fa-id-card"></i> رقم الاكتتاب:</div>
+                    <div class="info-value" id="studentId">-</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label"><i class="fas fa-certificate"></i> الشهادة:</div>
+                    <div class="info-value">ثانوي-تقنيات حاسوب-منهاج دمشق حديث</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label"><i class="fas fa-university"></i> المركز:</div>
+                    <div class="info-value" id="studentCenter">-</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label"><i class="fas fa-door-open"></i> القاعة:</div>
+                    <div class="info-value" id="studentHall">-</div>
+                </div>
+            </div>
+            
+            <div class="results-section">
+                <h3><i class="fas fa-chart-line"></i> النتائج التفصيلية</h3>
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>المادة</th>
+                            <th>الدرجة</th>
+                            <th>الدرجة العظمى</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>برمجة</td>
+                            <td id="programmingMark">-</td>
+                            <td>700</td>
+                        </tr>
+                        <tr>
+                            <td>الصيانة المادية والبرمجية</td>
+                            <td id="maintenanceMark">-</td>
+                            <td>700</td>
+                        </tr>
+                        <tr>
+                            <td>إدارة الشبكات</td>
+                            <td id="networksMark">-</td>
+                            <td>600</td>
+                        </tr>
+                        <tr>
+                            <td>تصميم موقع ويب</td>
+                            <td id="webDesignMark">-</td>
+                            <td>600</td>
+                        </tr>
+                        <tr>
+                            <td>اللغة العربية</td>
+                            <td id="arabicMark">-</td>
+                            <td>400</td>
+                        </tr>
+                        <tr>
+                            <td>رياضيات</td>
+                            <td id="mathMark">-</td>
+                            <td>400</td>
+                        </tr>
+                        <tr>
+                            <td>فيزياء وكيمياء</td>
+                            <td id="physicsChemistryMark">-</td>
+                            <td>400</td>
+                        </tr>
+                        <tr>
+                            <td>اللغة الإنجليزية</td>
+                            <td id="englishMark">-</td>
+                            <td>300</td>
+                        </tr>
+                        <tr>
+                            <td>التربية الإسلامية</td>
+                            <td id="islamicMark">-</td>
+                            <td>200</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td>المجموع الكلي</td>
+                            <td id="totalMark">-</td>
+                            <td>4300</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="summary">
+                    <h4><i class="fas fa-chart-pie"></i> ملخص النتائج</h4>
+                    <div class="summary-row">
+                        <span class="summary-label"><i class="fas fa-medal"></i> التقدير:</span>
+                        <span id="grade">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label"><i class="fas fa-trophy"></i> الترتيب بين الطلاب:</span>
+                        <span id="rank">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label"><i class="fas fa-percentage"></i> النسبة المئوية:</span>
+                        <span id="percentage">-</span>
+                    </div>
+                </div>
+                
+                <div class="message" id="message">
+                    <i class="fas fa-info-circle"></i> قم بالبحث عن طالب لعرض النتائج
+                </div>
+            </div>
+        </div>
+        
+        <!-- لوحة تحكم المسؤول -->
+        <div class="admin-section" id="adminPage">
+            <div class="admin-header">
+                <h3><i class="fas fa-cog"></i> لوحة تحكم المسؤول</h3>
+                <p>إدارة بيانات الطلاب والنتائج والعنوان والأخبار</p>
+            </div>
+            
+            <div class="admin-tabs">
+                <div class="admin-tab active" data-tab="students">إدارة الطلاب</div>
+                <div class="admin-tab" data-tab="results">إدارة النتائج</div>
+                <div class="admin-tab" data-tab="settings">إعدادات الموقع</div>
+                <div class="admin-tab" data-tab="news">إدارة الأخبار</div>
+            </div>
+            
+            <div class="admin-content">
+                <!-- إدارة الطلاب -->
+                <div class="admin-tab-content" id="students-tab">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h4><i class="fas fa-user-graduate"></i> قائمة الطلاب</h4>
+                        <button class="control-btn add-btn" onclick="showStudentForm()"><i class="fas fa-plus"></i> إضافة طالب</button>
+                    </div>
+                    
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>رقم الاكتتاب</th>
+                                <th>الاسم</th>
+                                <th>الشهادة</th>
+                                <th>المركز</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody">
+                            <!-- سيتم ملؤها بالبيانات -->
+                        </tbody>
+                    </table>
+                    
+                    <div class="admin-form" id="studentForm" style="display: none;">
+                        <h4><i class="fas fa-user-plus"></i> إضافة / تعديل طالب</h4>
+                        <div class="form-group">
+                            <label for="studentFormId">رقم الاكتتاب:</label>
+                            <input type="text" id="studentFormId">
+                        </div>
+                        <div class="form-group">
+                            <label for="studentFormName">الاسم الثلاثي:</label>
+                            <input type="text" id="studentFormName">
+                        </div>
+                        <div class="form-group">
+                            <label for="studentFormCertificate">الشهادة:</label>
+                            <input type="text" id="studentFormCertificate">
+                        </div>
+                        <div class="form-group">
+                            <label for="studentFormCenter">المركز:</label>
+                            <input type="text" id="studentFormCenter">
+                        </div>
+                        <div class="form-group">
+                            <label for="studentFormHall">القاعة ورقم الجلوس:</label>
+                            <input type="text" id="studentFormHall">
+                        </div>
+                        <div class="form-actions">
+                            <button class="control-btn add-btn" onclick="saveStudent()"><i class="fas fa-save"></i> حفظ</button>
+                            <button class="control-btn" onclick="hideStudentForm()"><i class="fas fa-times"></i> إلغاء</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- إدارة النتائج -->
+                <div class="admin-tab-content" id="results-tab" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h4><i class="fas fa-chart-line"></i> إدارة نتائج الطلاب</h4>
+                        <button class="control-btn add-btn" onclick="showResultForm()"><i class="fas fa-plus"></i> إضافة نتيجة</button>
+                    </div>
+                    
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>الطالب</th>
+                                <th>المجموع</th>
+                                <th>النسبة</th>
+                                <th>التقدير</th>
+                                <th>الترتيب</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsTableBody">
+                            <!-- سيتم ملؤها بالبيانات -->
+                        </tbody>
+                    </table>
+                    
+                    <div class="admin-form" id="resultForm" style="display: none;">
+                        <h4><i class="fas fa-chart-bar"></i> إضافة / تعديل نتيجة</h4>
+                        <div class="form-group">
+                            <label for="resultFormStudent">الطالب:</label>
+                            <select id="resultFormStudent">
+                                <!-- سيتم ملؤها بالطلاب -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>درجات المواد:</label>
+                            <div id="subjectMarksContainer">
+                                <!-- سيتم ملؤها بالمواد -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="resultFormGrade">التقدير:</label>
+                            <select id="resultFormGrade">
+                                <option value="امتياز">امتياز</option>
+                                <option value="جيد جداً">جيد جداً</option>
+                                <option value="جيد">جيد</option>
+                                <option value="مقبول">مقبول</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="resultFormRank">الترتيب:</label>
+                            <input type="text" id="resultFormRank" placeholder="مثال: 4 من 40">
+                        </div>
+                        <div class="form-group">
+                            <label for="resultFormMessage">رسالة التقدير:</label>
+                            <textarea id="resultFormMessage" rows="3"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button class="control-btn add-btn" onclick="saveResult()"><i class="fas fa-save"></i> حفظ</button>
+                            <button class="control-btn" onclick="hideResultForm()"><i class="fas fa-times"></i> إلغاء</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- إعدادات الموقع -->
+                <div class="admin-tab-content" id="settings-tab" style="display: none;">
+                    <h4><i class="fas fa-cogs"></i> إعدادات الموقع</h4>
+                    
+                    <div class="admin-form">
+                        <h4><i class="fas fa-heading"></i> إعدادات العنوان</h4>
+                        <div class="form-group">
+                            <label for="siteTitle">العنوان الرئيسي:</label>
+                            <input type="text" id="siteTitle" placeholder="أدخل العنوان الرئيسي للموقع">
+                        </div>
+                        <div class="form-group">
+                            <label for="siteSubtitle">العنوان الفرعي:</label>
+                            <input type="text" id="siteSubtitle" placeholder="أدخل العنوان الفرعي للموقع">
+                        </div>
+                        <div class="form-actions">
+                            <button class="control-btn add-btn" onclick="saveSiteSettings()"><i class="fas fa-save"></i> حفظ الإعدادات</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- إدارة الأخبار -->
+                <div class="admin-tab-content" id="news-tab" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h4><i class="fas fa-newspaper"></i> إدارة الأخبار والمستجدات</h4>
+                        <button class="control-btn add-btn" onclick="showNewsForm()"><i class="fas fa-plus"></i> إضافة خبر</button>
+                    </div>
+                    
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>عنوان الخبر</th>
+                                <th>تاريخ النشر</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="newsTableBody">
+                            <!-- سيتم ملؤها بالأخبار -->
+                        </tbody>
+                    </table>
+                    
+                    <div class="admin-form" id="newsForm" style="display: none;">
+                        <h4><i class="fas fa-newspaper"></i> إضافة / تعديل خبر</h4>
+                        <div class="form-group">
+                            <label for="newsTitle">عنوان الخبر:</label>
+                            <input type="text" id="newsTitle" placeholder="أدخل عنوان الخبر">
+                        </div>
+                        <div class="form-group">
+                            <label for="newsContent">محتوى الخبر:</label>
+                            <textarea id="newsContent" rows="5" placeholder="أدخل محتوى الخبر"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="newsDate">تاريخ النشر:</label>
+                            <input type="date" id="newsDate">
+                        </div>
+                        <div class="form-actions">
+                            <button class="control-btn add-btn" onclick="saveNews()"><i class="fas fa-save"></i> حفظ</button>
+                            <button class="control-btn" onclick="hideNewsForm()"><i class="fas fa-times"></i> إلغاء</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>وزارة التربية والتعليم- مديرية تربية الرقة</p>
+            <p>جميع الحقوق محفوظة © 2025 - نتائج الدورة الامتحانية لطلاب تقنيات الحاسوب</p>
+            <div class="designer-bar">
+                تم التصميم والبرمجة بواسطة مثنى 🧑🏻‍💻
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // إعداد حد الكسر (النجاح والرسوب)
+        const PASSING_THRESHOLD = 50; // 50% للنجاح
+        
+        // بيانات الطلاب - مع إضافة حالة النجاح/الرسوب
+        let students = [
+            {
+                id: 1001,
+                name: "مثنى عبدالله أحمد",
+                certificate: "ثانوي-تقنيات حاسوب-منهاج دمشق حديث",
+                center: "مركز الرقة",
+                hall: "القاعة 5 - مقعد 12",
+                marks: {
+                    programming: 650,
+                    maintenance: 620,
+                    networks: 540,
+                    webDesign: 580,
+                    arabic: 350,
+                    math: 320,
+                    physicsChemistry: 310,
+                    english: 250,
+                    islamic: 180
+                },
+                total: 3800,
+                percentage: 88.4,
+                grade: "امتياز",
+                rank: "3 من 40",
+                message: "تهانينا على هذا الإنجاز المتميز!",
+                passed: true // حالة النجاح
+            },
+            {
+                id: 1002,
+                name: "سارة محمد خالد",
+                certificate: "ثانوي-تقنيات حاسوب-منهاج دمشق حديث",
+                center: "مركز الرقة",
+                hall: "القاعة 5 - مقعد 15",
+                marks: {
+                    programming: 420,
+                    maintenance: 380,
+                    networks: 320,
+                    webDesign: 350,
+                    arabic: 250,
+                    math: 220,
+                    physicsChemistry: 210,
+                    english: 180,
+                    islamic: 120
+                },
+                total: 2450,
+                percentage: 57.0,
+                grade: "مقبول",
+                rank: "28 من 40",
+                message: "نتمنى لك التوفيق في المستقبل",
+                passed: true // حالة النجاح
+            },
+            {
+                id: 1003,
+                name: "أحمد علي حسين",
+                certificate: "ثانوي-تقنيات حاسوب-منهاج دمشق حديث",
+                center: "مركز الرقة",
+                hall: "القاعة 5 - مقعد 22",
+                marks: {
+                    programming: 280,
+                    maintenance: 250,
+                    networks: 220,
+                    webDesign: 240,
+                    arabic: 180,
+                    math: 160,
+                    physicsChemistry: 150,
+                    english: 120,
+                    islamic: 90
+                },
+                total: 1690,
+                percentage: 39.3,
+                grade: "راسب",
+                rank: "38 من 40",
+                message: "نأسف لعدم تمكنك من تحقيق النجاح هذه المرة",
+                passed: false // حالة الرسوب
+            }
+        ];
+
+        // بيانات الموقع
+        let siteSettings = {
+            title: "موقع مثنى لنتائج طلاب تقنيات الحاسوب",
+            subtitle: "النتائج النهائية للفصل الدراسي الثاني 2024/2025"
+        };
+
+        // بيانات الأخبار
+        let news = [];
+
+        // عناصر DOM
+        let searchInput, studentList, resultsPage, adminPage, loginSection, loadingElement;
+        let notificationElement, notificationText, searchByIdOption;
+        let themeToggle, adminBtn, adminTabs, adminTabContents, welcomeOverlay, mainTitle;
+        let subTitle, newsContainer, welcomeNotification, shareModal, resultImageContainer, resultImage;
+
+        // متغيرات البحث
+        let searchMode = 'id'; // فقط 'id' بعد حذف خيار البحث بالاسم
+
+        // متغيرات لوحة التحكم
+        let editingStudentId = null;
+        let editingNewsId = null;
+
+        // حالة المسؤول
+        let isAdminLoggedIn = false;
+
+        // تهيئة عناصر DOM بعد تحميل الصفحة
+        function initializeElements() {
+            searchInput = document.getElementById('searchInput');
+            studentList = document.getElementById('studentList');
+            resultsPage = document.getElementById('resultsPage');
+            adminPage = document.getElementById('adminPage');
+            loginSection = document.getElementById('loginSection');
+            loadingElement = document.getElementById('loading');
+            notificationElement = document.getElementById('notification');
+            notificationText = document.getElementById('notificationText');
+            searchByIdOption = document.getElementById('searchById');
+            themeToggle = document.getElementById('themeToggle');
+            adminBtn = document.getElementById('adminBtn');
+            adminTabs = document.querySelectorAll('.admin-tab');
+            adminTabContents = document.querySelectorAll('.admin-tab-content');
+            welcomeOverlay = document.getElementById('welcomeOverlay');
+            mainTitle = document.getElementById('mainTitle');
+            subTitle = document.getElementById('subTitle');
+            newsContainer = document.getElementById('newsContainer');
+            welcomeNotification = document.getElementById('welcomeNotification');
+            shareModal = document.getElementById('shareModal');
+            resultImageContainer = document.getElementById('resultImageContainer');
+            resultImage = document.getElementById('resultImage');
+        }
+
+        // تحميل البيانات من localStorage
+        function loadData() {
+            const savedStudents = localStorage.getItem('students');
+            const savedSettings = localStorage.getItem('siteSettings');
+            const savedNews = localStorage.getItem('news');
+            
+            if (savedStudents) {
+                try {
+                    students = JSON.parse(savedStudents);
+                } catch (e) {
+                    console.error('Error parsing students data:', e);
+                    // استخدام البيانات الافتراضية في حالة وجود خطأ
+                }
+            }
+            
+            if (savedSettings) {
+                try {
+                    siteSettings = JSON.parse(savedSettings);
+                    updateSiteTitles();
+                } catch (e) {
+                    console.error('Error parsing site settings:', e);
+                }
+            }
+            
+            if (savedNews) {
+                try {
+                    news = JSON.parse(savedNews);
+                    displayNews();
+                } catch (e) {
+                    console.error('Error parsing news data:', e);
+                    news = [];
+                }
+            }
+            
+            // إخفاء شعار الترحيب بعد 3 ثوانٍ
+            setTimeout(hideWelcomeOverlay, 3000);
+        }
+
+        // تحديث عناوين الموقع
+        function updateSiteTitles() {
+            if (mainTitle) mainTitle.textContent = siteSettings.title;
+            if (subTitle) subTitle.textContent = siteSettings.subtitle;
+        }
+
+        // عرض الأخبار
+        function displayNews() {
+            if (!newsContainer) return;
+            
+            if (news.length === 0) {
+                newsContainer.innerHTML = '<div class="no-news">لا توجد أخبار حالياً</div>';
+                return;
+            }
+            
+            // ترتيب الأخبار من الأحدث إلى الأقدم
+            const sortedNews = [...news].sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            newsContainer.innerHTML = '';
+            sortedNews.forEach(item => {
+                const newsItem = document.createElement('div');
+                newsItem.className = 'news-item';
+                newsItem.innerHTML = `
+                    <h4>${item.title}</h4>
+                    <p>${item.content}</p>
+                    <div class="news-date">${formatDate(item.date)}</div>
+                `;
+                newsContainer.appendChild(newsItem);
+            });
+        }
+
+        // تنسيق التاريخ
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ar-EG', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // إخفاء شعار الترحيب
+        function hideWelcomeOverlay() {
+            if (welcomeOverlay) {
+                welcomeOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    welcomeOverlay.style.display = 'none';
+                    // عرض إشعار الترحيب بعد إخفاء شعار التحميل
+                    showWelcomeNotification();
+                }, 1000);
+            }
+        }
+
+        // عرض إشعار الترحيب
+        function showWelcomeNotification() {
+            if (welcomeNotification) {
+                welcomeNotification.classList.add('show');
+                
+                // إخفاء الإشعار بعد 5 ثوانٍ
+                setTimeout(() => {
+                    welcomeNotification.classList.remove('show');
+                }, 5000);
+            }
+        }
+
+        // حفظ البيانات إلى localStorage
+        function saveData() {
+            try {
+                localStorage.setItem('students', JSON.stringify(students));
+                localStorage.setItem('siteSettings', JSON.stringify(siteSettings));
+                localStorage.setItem('news', JSON.stringify(news));
+            } catch (e) {
+                console.error('Error saving data to localStorage:', e);
+                showNotification('حدث خطأ أثناء حفظ البيانات');
+            }
+        }
+
+        // إضافة event listeners
+        function setupEventListeners() {
+            if (searchInput) {
+                searchInput.addEventListener('input', handleSearchInput);
+                searchInput.addEventListener('focus', handleSearchInput);
+            }
+            
+            if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+            
+            // إضافة event listeners لألسنة لوحة التحكم
+            adminTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // إزالة النشاط من جميع الألسنة
+                    adminTabs.forEach(t => t.classList.remove('active'));
+                    // إخفاء جميع محتويات الألسنة
+                    adminTabContents.forEach(content => content.style.display = 'none');
+                    
+                    // تفعيل اللسان المحدد وعرض محتواه
+                    tab.classList.add('active');
+                    const tabContent = document.getElementById(`${tabId}-tab`);
+                    if (tabContent) tabContent.style.display = 'block';
+                    
+                    // تحميل البيانات الخاصة بكل لسان
+                    if (tabId === 'settings') {
+                        loadSiteSettings();
+                    } else if (tabId === 'news') {
+                        loadNewsTable();
+                    }
+                });
+            });
+
+            // البحث فقط برقم الاكتتاب بعد حذف خيار البحث بالاسم
+            if (searchByIdOption) {
+                searchByIdOption.addEventListener('click', () => {
+                    searchMode = 'id';
+                    searchByIdOption.classList.add('active');
+                    if (searchInput) searchInput.placeholder = 'ابحث برقم الاكتتاب';
+                    handleSearchInput();
+                });
+            }
+        }
+
+        // تبديل الوضع الليلي/النهاري
+        function toggleTheme() {
+            const body = document.body;
+            const icon = themeToggle.querySelector('i');
+            
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // تحميل الوضع المحفوظ
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const icon = themeToggle.querySelector('i');
+            
+            if (savedTheme === 'light') {
+                document.body.classList.remove('dark-mode');
+                document.body.classList.add('light-mode');
+                if (icon) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+            } else {
+                document.body.classList.remove('light-mode');
+                document.body.classList.add('dark-mode');
+                if (icon) {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            }
+        }
+
+        // عرض صفحة النتائج وإخفاء الصفحات الأخرى
+        function showResults() {
+            if (resultsPage) resultsPage.style.display = 'block';
+            if (adminPage) adminPage.style.display = 'none';
+            showNotification('عرض صفحة النتائج');
+        }
+
+        // عرض نافذة تسجيل الدخول للمسؤول
+        function showAdminLogin() {
+            if (isAdminLoggedIn) {
+                showAdminPanel();
+            } else {
+                if (loginSection) loginSection.style.display = 'flex';
+            }
+        }
+
+        // إخفاء نافذة تسجيل الدخول للمسؤول
+        function hideAdminLogin() {
+            if (loginSection) loginSection.style.display = 'none';
+        }
+
+        // تسجيل الدخول للمسؤول
+        function adminLogin() {
+            const username = document.getElementById('adminUsername');
+            const password = document.getElementById('adminPassword');
+            
+            if (!username || !password) {
+                showNotification('عناصر تسجيل الدخول غير موجودة');
+                return;
+            }
+            
+            const usernameValue = username.value;
+            const passwordValue = password.value;
+            
+            // كلمة المرور الافتراضية (في تطبيق حقيقي يجب استخدام خادم آمن)
+            if (usernameValue === 'thnwi' && passwordValue === 'th2nwi505cr7hs') {
+                isAdminLoggedIn = true;
+                if (loginSection) loginSection.style.display = 'none';
+                showAdminPanel();
+                showNotification('تم تسجيل الدخول بنجاح');
+            } else {
+                showNotification('اسم المستخدم أو كلمة المرور غير صحيحة');
+            }
+        }
+
+        // عرض لوحة تحكم المسؤول
+        function showAdminPanel() {
+            if (!isAdminLoggedIn) {
+                showAdminLogin();
+                return;
+            }
+            
+            if (resultsPage) resultsPage.style.display = 'none';
+            if (adminPage) adminPage.style.display = 'block';
+            
+            // تحميل البيانات في الجداول
+            loadStudentsTable();
+            loadResultsTable();
+            loadSiteSettings();
+            loadNewsTable();
+            
+            showNotification('عرض لوحة تحكم المسؤول');
+        }
+
+        // تحميل جدول الطلاب
+        function loadStudentsTable() {
+            const tbody = document.getElementById('studentsTableBody');
+            if (!tbody) return;
+            
+            tbody.innerHTML = '';
+            
+            students.forEach(student => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.id}</td>
+                    <td>${student.name}</td>
+                    <td>${student.certificate}</td>
+                    <td>${student.center}</td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="editStudent('${student.id}')"><i class="fas fa-edit"></i> تعديل</button>
+                        <button class="action-btn delete-btn" onclick="deleteStudent('${student.id}')"><i class="fas fa-trash"></i> حذف</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // تحميل جدول النتائج
+        function loadResultsTable() {
+            const tbody = document.getElementById('resultsTableBody');
+            if (!tbody) return;
+            
+            tbody.innerHTML = '';
+            
+            students.forEach(student => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.name} (${student.id})</td>
+                    <td>${student.total}</td>
+                    <td>${student.percentage}%</td>
+                    <td>${student.grade}</td>
+                    <td>${student.rank}</td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="editResult('${student.id}')"><i class="fas fa-edit"></i> تعديل</button>
+                        <button class="action-btn delete-btn" onclick="deleteResult('${student.id}')"><i class="fas fa-trash"></i> حذف</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // تحميل إعدادات الموقع
+        function loadSiteSettings() {
+            const siteTitle = document.getElementById('siteTitle');
+            const siteSubtitle = document.getElementById('siteSubtitle');
+            
+            if (siteTitle) siteTitle.value = siteSettings.title;
+            if (siteSubtitle) siteSubtitle.value = siteSettings.subtitle;
+        }
+
+        // حفظ إعدادات الموقع
+        function saveSiteSettings() {
+            const siteTitle = document.getElementById('siteTitle');
+            const siteSubtitle = document.getElementById('siteSubtitle');
+            
+            if (!siteTitle || !siteSubtitle) {
+                showNotification('يرجى ملء جميع الحقول');
+                return;
+            }
+            
+            const title = siteTitle.value;
+            const subtitle = siteSubtitle.value;
+            
+            if (!title || !subtitle) {
+                showNotification('يرجى ملء جميع الحقول');
+                return;
+            }
+            
+            siteSettings.title = title;
+            siteSettings.subtitle = subtitle;
+            
+            saveData();
+            updateSiteTitles();
+            showNotification('تم حفظ إعدادات الموقع بنجاح');
+        }
+
+        // تحميل جدول الأخبار
+        function loadNewsTable() {
+            const tbody = document.getElementById('newsTableBody');
+            if (!tbody) return;
+            
+            tbody.innerHTML = '';
+            
+            news.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.title}</td>
+                    <td>${formatDate(item.date)}</td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="editNews(${index})"><i class="fas fa-edit"></i> تعديل</button>
+                        <button class="action-btn delete-btn" onclick="deleteNews(${index})"><i class="fas fa-trash"></i> حذف</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // عرض نموذج إضافة/تعديل طالب
+        function showStudentForm(student = null) {
+            const form = document.getElementById('studentForm');
+            if (!form) return;
+            
+            form.style.display = 'block';
+            
+            const studentFormId = document.getElementById('studentFormId');
+            const studentFormName = document.getElementById('studentFormName');
+            const studentFormCertificate = document.getElementById('studentFormCertificate');
+            const studentFormCenter = document.getElementById('studentFormCenter');
+            const studentFormHall = document.getElementById('studentFormHall');
+            
+            if (!studentFormId || !studentFormName || !studentFormCertificate || !studentFormCenter || !studentFormHall) {
+                showNotification('عناصر النموذج غير موجودة');
+                return;
+            }
+            
+            if (student) {
+                // وضع التعديل
+                studentFormId.value = student.id;
+                studentFormName.value = student.name;
+                studentFormCertificate.value = student.certificate;
+                studentFormCenter.value = student.center;
+                studentFormHall.value = student.hall;
+                editingStudentId = student.id;
+                
+                // جعل حقل رقم الاكتتاب غير قابل للتعديل في وضع التعديل
+                studentFormId.readOnly = true;
+            } else {
+                // وضع الإضافة
+                studentFormId.value = '';
+                studentFormName.value = '';
+                studentFormCertificate.value = '';
+                studentFormCenter.value = '';
+                studentFormHall.value = '';
+                editingStudentId = null;
+                
+                // جعل حقل رقم الاكتتاب قابل للتعديل في وضع الإضافة
+                studentFormId.readOnly = false;
+            }
+            
+            // تمرير إلى أعلى النموذج
+            form.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // إخفاء نموذج الطالب
+        function hideStudentForm() {
+            const form = document.getElementById('studentForm');
+            if (form) form.style.display = 'none';
+        }
+
+        // حفظ الطالب
+        function saveStudent() {
+            const studentFormId = document.getElementById('studentFormId');
+            const studentFormName = document.getElementById('studentFormName');
+            const studentFormCertificate = document.getElementById('studentFormCertificate');
+            const studentFormCenter = document.getElementById('studentFormCenter');
+            const studentFormHall = document.getElementById('studentFormHall');
+            
+            if (!studentFormId || !studentFormName || !studentFormCertificate || !studentFormCenter || !studentFormHall) {
+                showNotification('عناصر النموذج غير موجودة');
+                return;
+            }
+            
+            const idValue = studentFormId.value;
+            const nameValue = studentFormName.value;
+            const certificateValue = studentFormCertificate.value;
+            const centerValue = studentFormCenter.value;
+            const hallValue = studentFormHall.value;
+            
+            if (!idValue || !nameValue || !certificateValue || !centerValue || !hallValue) {
+                showNotification('يرجى ملء جميع الحقول');
+                return;
+            }
+            
+            if (editingStudentId) {
+                // تحديث الطالب الموجود
+                const index = students.findIndex(s => s.id == editingStudentId);
+                if (index !== -1) {
+                    students[index].id = parseInt(idValue);
+                    students[index].name = nameValue;
+                    students[index].certificate = certificateValue;
+                    students[index].center = centerValue;
+                    students[index].hall = hallValue;
+                }
+            } else {
+                // إضافة طالب جديد
+                // التحقق من عدم وجود طالب بنفس الرقم
+                if (students.find(s => s.id == idValue)) {
+                    showNotification('يوجد بالفعل طالب بهذا الرقم');
+                    return;
+                }
+                
+                const newStudent = {
+                    id: parseInt(idValue),
+                    name: nameValue,
+                    certificate: certificateValue,
+                    center: centerValue,
+                    hall: hallValue,
+                    marks: {
+                        programming: 0,
+                        maintenance: 0,
+                        networks: 0,
+                        webDesign: 0,
+                        arabic: 0,
+                        math: 0,
+                        physicsChemistry: 0,
+                        english: 0,
+                        islamic: 0
+                    },
+                    total: 0,
+                    percentage: 0,
+                    grade: "لم يتم التقدير",
+                    rank: "غير محدد",
+                    message: "لم يتم إدخال النتائج بعد",
+                    passed: false // حالة الرسوب افتراضياً
+                };
+                
+                students.push(newStudent);
+            }
+            
+            saveData();
+            loadStudentsTable();
+            hideStudentForm();
+            showNotification(editingStudentId ? 'تم تحديث الطالب بنجاح' : 'تم إضافة الطالب بنجاح');
+        }
+
+        // تعديل طالب
+        function editStudent(id) {
+            const student = students.find(s => s.id == id);
+            if (student) {
+                showStudentForm(student);
+            }
+        }
+
+        // حذف طالب
+        function deleteStudent(id) {
+            if (confirm('هل أنت متأكد من حذف هذا الطالب؟')) {
+                students = students.filter(s => s.id != id);
+                saveData();
+                loadStudentsTable();
+                loadResultsTable();
+                showNotification('تم حذف الطالب بنجاح');
+            }
+        }
+
+        // عرض نموذج إضافة/تعديل نتيجة
+        function showResultForm(student = null) {
+            const form = document.getElementById('resultForm');
+            if (!form) return;
+            
+            form.style.display = 'block';
+            
+            // تعبئة قائمة الطلاب
+            const studentSelect = document.getElementById('resultFormStudent');
+            if (studentSelect) {
+                studentSelect.innerHTML = '';
+                students.forEach(s => {
+                    const option = document.createElement('option');
+                    option.value = s.id;
+                    option.textContent = `${s.name} (${s.id})`;
+                    if (student && s.id == student.id) {
+                        option.selected = true;
+                    }
+                    studentSelect.appendChild(option);
+                });
+            }
+            
+            // تعبئة حقول درجات المواد
+            const marksContainer = document.getElementById('subjectMarksContainer');
+            if (marksContainer) {
+                marksContainer.innerHTML = '';
+                
+                // قائمة المواد الدراسية
+                const subjects = [
+                    { key: 'programming', name: 'برمجة', maxMark: 700 },
+                    { key: 'maintenance', name: 'الصيانة المادية والبرمجية', maxMark: 700 },
+                    { key: 'networks', name: 'إدارة الشبكات', maxMark: 600 },
+                    { key: 'webDesign', name: 'تصميم موقع ويب', maxMark: 600 },
+                    { key: 'arabic', name: 'اللغة العربية', maxMark: 400 },
+                    { key: 'math', name: 'رياضيات', maxMark: 400 },
+                    { key: 'physicsChemistry', name: 'فيزياء وكيمياء', maxMark: 400 },
+                    { key: 'english', name: 'اللغة الإنجليزية', maxMark: 300 },
+                    { key: 'islamic', name: 'التربية الإسلامية', maxMark: 200 }
+                ];
+                
+                subjects.forEach(subject => {
+                    const markValue = student ? student.marks[subject.key] || 0 : 0;
+                    
+                    const div = document.createElement('div');
+                    div.style.marginBottom = '10px';
+                    div.innerHTML = `
+                        <label>${subject.name} (الحد الأقصى: ${subject.maxMark}):</label>
+                        <input type="number" min="0" max="${subject.maxMark}" value="${markValue}" 
+                               data-subject="${subject.key}" style="width: 100px; margin-right: 10px;">
+                    `;
+                    marksContainer.appendChild(div);
+                });
+            }
+            
+            const resultFormGrade = document.getElementById('resultFormGrade');
+            const resultFormRank = document.getElementById('resultFormRank');
+            const resultFormMessage = document.getElementById('resultFormMessage');
+            
+            if (student) {
+                // وضع التعديل
+                if (resultFormGrade) resultFormGrade.value = student.grade;
+                if (resultFormRank) resultFormRank.value = student.rank;
+                if (resultFormMessage) resultFormMessage.value = student.message;
+                editingStudentId = student.id;
+            } else {
+                // وضع الإضافة
+                if (resultFormGrade) resultFormGrade.value = "امتياز";
+                if (resultFormRank) resultFormRank.value = "";
+                if (resultFormMessage) resultFormMessage.value = "";
+                editingStudentId = null;
+            }
+            
+            // تمرير إلى أعلى النموذج
+            form.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // إخفاء نموذج النتيجة
+        function hideResultForm() {
+            const form = document.getElementById('resultForm');
+            if (form) form.style.display = 'none';
+        }
+
+        // حفظ النتيجة
+        function saveResult() {
+            const studentId = document.getElementById('resultFormStudent');
+            const grade = document.getElementById('resultFormGrade');
+            const rank = document.getElementById('resultFormRank');
+            const message = document.getElementById('resultFormMessage');
+            
+            if (!studentId || !grade || !rank || !message) {
+                showNotification('عناصر النموذج غير موجودة');
+                return;
+            }
+            
+            const studentIdValue = studentId.value;
+            const gradeValue = grade.value;
+            const rankValue = rank.value;
+            const messageValue = message.value;
+            
+            if (!studentIdValue || !gradeValue || !rankValue || !messageValue) {
+                showNotification('يرجى ملء جميع الحقول');
+                return;
+            }
+            
+            // جمع درجات المواد
+            const marks = {};
+            let total = 0;
+            let totalMax = 0;
+            
+            // قائمة المواد الدراسية
+            const subjects = [
+                { key: 'programming', name: 'برمجة', maxMark: 700 },
+                { key: 'maintenance', name: 'الصيانة المادية والبرمجية', maxMark: 700 },
+                { key: 'networks', name: 'إدارة الشبكات', maxMark: 600 },
+                { key: 'webDesign', name: 'تصميم موقع ويب', maxMark: 600 },
+                { key: 'arabic', name: 'اللغة العربية', maxMark: 400 },
+                { key: 'math', name: 'رياضيات', maxMark: 400 },
+                { key: 'physicsChemistry', name: 'فيزياء وكيمياء', maxMark: 400 },
+                { key: 'english', name: 'اللغة الإنجليزية', maxMark: 300 },
+                { key: 'islamic', name: 'التربية الإسلامية', maxMark: 200 }
+            ];
+            
+            subjects.forEach(subject => {
+                const markInput = document.querySelector(`input[data-subject="${subject.key}"]`);
+                if (markInput) {
+                    const markValue = parseInt(markInput.value) || 0;
+                    
+                    marks[subject.key] = markValue;
+                    total += markValue;
+                    totalMax += subject.maxMark;
+                }
+            });
+            
+            // حساب النسبة المئوية
+            const percentage = totalMax > 0 ? ((total / totalMax) * 100).toFixed(1) : 0;
+            
+            // تحديد حالة النجاح/الرسوب
+            const passed = parseFloat(percentage) >= PASSING_THRESHOLD;
+            
+            // تحديث بيانات الطالب
+            const studentIndex = students.findIndex(s => s.id == studentIdValue);
+            if (studentIndex !== -1) {
+                students[studentIndex].marks = marks;
+                students[studentIndex].total = total;
+                students[studentIndex].percentage = parseFloat(percentage);
+                students[studentIndex].grade = gradeValue;
+                students[studentIndex].rank = rankValue;
+                students[studentIndex].message = messageValue;
+                students[studentIndex].passed = passed;
+            }
+            
+            saveData();
+            loadResultsTable();
+            hideResultForm();
+            showNotification('تم حفظ النتيجة بنجاح');
+        }
+
+        // تعديل نتيجة
+        function editResult(id) {
+            const student = students.find(s => s.id == id);
+            if (student) {
+                showResultForm(student);
+            }
+        }
+
+        // حذف نتيجة
+        function deleteResult(id) {
+            if (confirm('هل أنت متأكد من حذف نتيجة هذا الطالب؟')) {
+                const studentIndex = students.findIndex(s => s.id == id);
+                if (studentIndex !== -1) {
+                    // إعادة تعيين النتيجة
+                    students[studentIndex].marks = {
+                        programming: 0,
+                        maintenance: 0,
+                        networks: 0,
+                        webDesign: 0,
+                        arabic: 0,
+                        math: 0,
+                        physicsChemistry: 0,
+                        english: 0,
+                        islamic: 0
+                    };
+                    students[studentIndex].total = 0;
+                    students[studentIndex].percentage = 0;
+                    students[studentIndex].grade = "لم يتم التقدير";
+                    students[studentIndex].rank = "غير محدد";
+                    students[studentIndex].message = "لم يتم إدخال النتائج بعد";
+                    students[studentIndex].passed = false;
+                }
+                
+                saveData();
+                loadResultsTable();
+                showNotification('تم حذف النتيجة بنجاح');
+            }
+        }
+
+        // عرض نموذج إضافة/تعديل خبر
+        function showNewsForm(newsItem = null) {
+            const form = document.getElementById('newsForm');
+            if (!form) return;
+            
+            form.style.display = 'block';
+            
+            const newsTitle = document.getElementById('newsTitle');
+            const newsContent = document.getElementById('newsContent');
+            const newsDate = document.getElementById('newsDate');
+            
+            if (!newsTitle || !newsContent || !newsDate) {
+                showNotification('عناصر النموذج غير موجودة');
+                return;
+            }
+            
+            if (newsItem) {
+                // وضع التعديل
+                newsTitle.value = newsItem.title;
+                newsContent.value = newsItem.content;
+                newsDate.value = newsItem.date;
+                editingNewsId = news.indexOf(newsItem);
+            } else {
+                // وضع الإضافة
+                newsTitle.value = '';
+                newsContent.value = '';
+                newsDate.value = new Date().toISOString().split('T')[0];
+                editingNewsId = null;
+            }
+            
+            // تمرير إلى أعلى النموذج
+            form.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // إخفاء نموذج الخبر
+        function hideNewsForm() {
+            const form = document.getElementById('newsForm');
+            if (form) form.style.display = 'none';
+        }
+
+        // حفظ الخبر
+        function saveNews() {
+            const newsTitle = document.getElementById('newsTitle');
+            const newsContent = document.getElementById('newsContent');
+            const newsDate = document.getElementById('newsDate');
+            
+            if (!newsTitle || !newsContent || !newsDate) {
+                showNotification('عناصر النموذج غير موجودة');
+                return;
+            }
+            
+            const title = newsTitle.value;
+            const content = newsContent.value;
+            const date = newsDate.value;
+            
+            if (!title || !content || !date) {
+                showNotification('يرجى ملء جميع الحقول');
+                return;
+            }
+            
+            const newsItem = {
+                title: title,
+                content: content,
+                date: date
+            };
+            
+            if (editingNewsId !== null) {
+                // تحديث الخبر الموجود
+                news[editingNewsId] = newsItem;
+            } else {
+                // إضافة خبر جديد
+                news.push(newsItem);
+            }
+            
+            saveData();
+            loadNewsTable();
+            displayNews();
+            hideNewsForm();
+            showNotification(editingNewsId !== null ? 'تم تحديث الخبر بنجاح' : 'تم إضافة الخبر بنجاح');
+        }
+
+        // تعديل خبر
+        function editNews(index) {
+            const newsItem = news[index];
+            if (newsItem) {
+                showNewsForm(newsItem);
+            }
+        }
+
+        // حذف خبر
+        function deleteNews(index) {
+            if (confirm('هل أنت متأكد من حذف هذا الخبر؟')) {
+                news.splice(index, 1);
+                saveData();
+                loadNewsTable();
+                displayNews();
+                showNotification('تم حذف الخبر بنجاح');
+            }
+        }
+
+        // عرض إشعار
+        function showNotification(message) {
+            if (!notificationElement || !notificationText) return;
+            
+            notificationText.textContent = message;
+            notificationElement.classList.add('show');
+            setTimeout(() => {
+                notificationElement.classList.remove('show');
+            }, 3000);
+        }
+
+        // وظيفة معالجة إدخال البحث
+        function handleSearchInput() {
+            if (!searchInput) return;
+            
+            const searchText = searchInput.value.trim();
+            if (searchText.length === 0) {
+                if (studentList) studentList.style.display = 'none';
+                return;
+            }
+
+            // تصفية الطلاب بناء على نمط البحث (رقم الاكتتاب فقط)
+            const filteredStudents = students.filter(student => {
+                return student.id.toString().includes(searchText);
+            });
+
+            displayStudentList(filteredStudents, studentList);
+        }
+
+        // عرض قائمة الطلاب
+        function displayStudentList(studentsList, listElement) {
+            if (!listElement) return;
+            
+            if (studentsList.length === 0) {
+                listElement.style.display = 'none';
+                return;
+            }
+
+            listElement.innerHTML = '';
+            studentsList.forEach(student => {
+                const item = document.createElement('div');
+                item.className = 'student-item';
+                item.textContent = `${student.id} - ${student.name}`;
+                item.addEventListener('click', () => {
+                    // في البحث العادي
+                    updateStudentData(student);
+                    listElement.style.display = 'none';
+                    if (searchInput) searchInput.value = '';
+                    showNotification(`تم تحميل بيانات الطالب: ${student.name}`);
+                });
+                listElement.appendChild(item);
+            });
+
+            listElement.style.display = 'block';
+        }
+
+        // البحث عن الطالب
+        function searchStudent() {
+            if (!searchInput) return;
+            
+            const searchText = searchInput.value.trim();
+            if (searchText.length === 0) {
+                showNotification('يرجى إدخال رقم الاكتتاب للبحث');
+                return;
+            }
+
+            // عرض تحميل
+            if (loadingElement) loadingElement.style.display = 'block';
+
+            // محاكاة وقت التحميل
+            setTimeout(() => {
+                let student = students.find(s => s.id.toString() === searchText);
+
+                if (loadingElement) loadingElement.style.display = 'none';
+
+                if (student) {
+                    updateStudentData(student);
+                    showResults();
+                    showNotification(`تم العثور على الطالب: ${student.name}`);
+                } else {
+                    showNotification('لم يتم العثور على طالب بهذا الرقم');
+                }
+            }, 800);
+        }
+
+        // تحديث بيانات الطالب المعروضة
+        function updateStudentData(student) {
+            // تحديث المعلومات الأساسية
+            const studentName = document.getElementById('studentName');
+            const studentId = document.getElementById('studentId');
+            const studentCenter = document.getElementById('studentCenter');
+            const studentHall = document.getElementById('studentHall');
+            
+            if (studentName) studentName.textContent = student.name;
+            if (studentId) studentId.textContent = student.id;
+            if (studentCenter) studentCenter.textContent = student.center;
+            if (studentHall) studentHall.textContent = student.hall;
+
+            // تحديث الدرجات
+            const programmingMark = document.getElementById('programmingMark');
+            const maintenanceMark = document.getElementById('maintenanceMark');
+            const networksMark = document.getElementById('networksMark');
+            const webDesignMark = document.getElementById('webDesignMark');
+            const arabicMark = document.getElementById('arabicMark');
+            const mathMark = document.getElementById('mathMark');
+            const physicsChemistryMark = document.getElementById('physicsChemistryMark');
+            const englishMark = document.getElementById('englishMark');
+            const islamicMark = document.getElementById('islamicMark');
+            
+            if (programmingMark) programmingMark.textContent = student.marks.programming;
+            if (maintenanceMark) maintenanceMark.textContent = student.marks.maintenance;
+            if (networksMark) networksMark.textContent = student.marks.networks;
+            if (webDesignMark) webDesignMark.textContent = student.marks.webDesign;
+            if (arabicMark) arabicMark.textContent = student.marks.arabic;
+            if (mathMark) mathMark.textContent = student.marks.math;
+            if (physicsChemistryMark) physicsChemistryMark.textContent = student.marks.physicsChemistry;
+            if (englishMark) englishMark.textContent = student.marks.english;
+            if (islamicMark) islamicMark.textContent = student.marks.islamic;
+
+            // تحديث المجموع والتقدير والترتيب
+            const totalMark = document.getElementById('totalMark');
+            const grade = document.getElementById('grade');
+            const rank = document.getElementById('rank');
+            const percentage = document.getElementById('percentage');
+            const message = document.getElementById('message');
+            
+            if (totalMark) totalMark.textContent = student.total;
+            
+            // إضافة حالة النجاح/الرسوب إلى التقدير
+            if (grade) {
+                const statusClass = student.passed ? 'status-pass' : 'status-fail';
+                const statusText = student.passed ? 'ناجح' : 'راسب';
+                grade.innerHTML = `<span class="result-status ${statusClass}">${statusText}</span> ${student.grade}`;
+            }
+            
+            if (rank) rank.textContent = student.rank;
+            if (percentage) percentage.textContent = student.percentage + '%';
+            if (message) message.textContent = student.message;
+            
+            // حفظ الطالب الحالي للمشاركة
+            window.currentStudent = student;
+        }
+
+        // إخفاء قائمة الطلاب عند النقر خارجها
+        document.addEventListener('click', (e) => {
+            if (searchInput && !searchInput.contains(e.target) && studentList && !studentList.contains(e.target)) {
+                if (studentList) studentList.style.display = 'none';
+            }
+        });
+
+        // عرض نافذة المشاركة
+        function showShareModal() {
+            if (!window.currentStudent) {
+                showNotification('يرجى البحث عن طالب أولاً');
+                return;
+            }
+            
+            if (shareModal) shareModal.style.display = 'flex';
+        }
+
+        // إخفاء نافذة المشاركة
+        function hideShareModal() {
+            if (shareModal) shareModal.style.display = 'none';
+        }
+
+        // مشاركة النتيجة
+        function shareResult(platform) {
+            if (!window.currentStudent) {
+                showNotification('لا توجد نتيجة لمشاركتها');
+                return;
+            }
+            
+            const student = window.currentStudent;
+            
+            if (platform === 'image') {
+                // إنشاء صورة النتيجة
+                createResultImage();
+                return;
+            }
+            
+            const text = `نتيجة الطالب ${student.name} - المجموع: ${student.total} - النسبة: ${student.percentage}% - ${student.passed ? 'ناجح' : 'راسب'}`;
+            const url = window.location.href;
+            
+            let shareUrl;
+            
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + ' ' + url)}`;
+                    break;
+            }
+            
+            // فتح نافذة المشاركة
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+            hideShareModal();
+            showNotification('تم فتح نافذة المشاركة');
+        }
+
+        // إنشاء صورة النتيجة
+        function createResultImage() {
+            if (!window.currentStudent) return;
+            
+            const student = window.currentStudent;
+            
+            // إخفاء نافذة المشاركة
+            hideShareModal();
+            
+            // إنشاء عنصر مؤقت لالتقاط الصورة منه
+            const tempContainer = document.createElement('div');
+            tempContainer.style.width = '800px';
+            tempContainer.style.padding = '40px';
+            tempContainer.style.background = 'linear-gradient(135deg, #0a192f, #112240)';
+            tempContainer.style.borderRadius = '20px';
+            tempContainer.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
+            tempContainer.style.color = '#ccd6f6';
+            tempContainer.style.fontFamily = 'Tajawal, Arial, sans-serif';
+            tempContainer.style.position = 'fixed';
+            tempContainer.style.left = '-9999px';
+            tempContainer.style.top = '-9999px';
+            tempContainer.style.zIndex = '-1000';
+            
+            // إضافة محتوى الصورة
+            tempContainer.innerHTML = `
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h1 style="color: #64ffda; font-size: 32px; margin-bottom: 10px;">نتيجة الطالب</h1>
+                    <h2 style="color: #ccd6f6; font-size: 20px;">موقع مثنى - تقنيات الحاسوب</h2>
+                </div>
+                
+                <div style="background: rgba(17, 34, 64, 0.5); padding: 25px; border-radius: 12px; margin-bottom: 25px; border-right: 4px solid #64ffda;">
+                    <div style="display: flex; margin-bottom: 15px;">
+                        <div style="width: 170px; font-weight: bold; color: #64ffda;">الاسم الثلاثي:</div>
+                        <div style="flex: 1; color: #ccd6f6; font-weight: 500;">${student.name}</div>
+                    </div>
+                    <div style="display: flex; margin-bottom: 15px;">
+                        <div style="width: 170px; font-weight: bold; color: #64ffda;">رقم الاكتتاب:</div>
+                        <div style="flex: 1; color: #ccd6f6; font-weight: 500;">${student.id}</div>
+                    </div>
+                    <div style="display: flex; margin-bottom: 15px;">
+                        <div style="width: 170px; font-weight: bold; color: #64ffda;">الشهادة:</div>
+                        <div style="flex: 1; color: #ccd6f6; font-weight: 500;">${student.certificate}</div>
+                    </div>
+                    <div style="display: flex; margin-bottom: 15px;">
+                        <div style="width: 170px; font-weight: bold; color: #64ffda;">المركز:</div>
+                        <div style="flex: 1; color: #ccd6f6; font-weight: 500;">${student.center}</div>
+                    </div>
+                    <div style="display: flex;">
+                        <div style="width: 170px; font-weight: bold; color: #64ffda;">القاعة:</div>
+                        <div style="flex: 1; color: #ccd6f6; font-weight: 500;">${student.hall}</div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(17, 34, 64, 0.5); padding: 25px; border-radius: 12px; margin-bottom: 25px; border-right: 4px solid #64ffda;">
+                    <h3 style="color: #64ffda; text-align: center; margin-bottom: 20px; font-size: 22px;">النتائج التفصيلية</h3>
+                    
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                        <thead>
+                            <tr>
+                                <th style="background: linear-gradient(135deg, #0a192f, #112240); padding: 12px; text-align: right; border: 1px solid rgba(100, 255, 218, 0.2); color: #64ffda;">المادة</th>
+                                <th style="background: linear-gradient(135deg, #0a192f, #112240); padding: 12px; text-align: center; border: 1px solid rgba(100, 255, 218, 0.2); color: #64ffda;">الدرجة</th>
+                                <th style="background: linear-gradient(135deg, #0a192f, #112240); padding: 12px; text-align: center; border: 1px solid rgba(100, 255, 218, 0.2); color: #64ffda;">الدرجة العظمى</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background: rgba(17, 34, 64, 0.3);">
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: right;">برمجة</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">${student.marks.programming}</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">700</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: right;">الصيانة المادية والبرمجية</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">${student.marks.maintenance}</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">700</td>
+                            </tr>
+                            <tr style="background: rgba(17, 34, 64, 0.3);">
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: right;">إدارة الشبكات</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">${student.marks.networks}</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">600</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: right;">تصميم موقع ويب</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">${student.marks.webDesign}</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">600</td>
+                            </tr>
+                            <tr style="background: rgba(17, 34, 64, 0.3);">
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: right;">اللغة العربية</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">${student.marks.arabic}</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">400</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: right;">رياضيات</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">${student.marks.math}</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">400</td>
+                            </tr>
+                            <tr style="background: rgba(17, 34, 64, 0.3);">
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: right;">فيزياء وكيمياء</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">${student.marks.physicsChemistry}</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">400</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: right;">اللغة الإنجليزية</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">${student.marks.english}</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">300</td>
+                            </tr>
+                            <tr style="background: rgba(17, 34, 64, 0.3);">
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: right;">التربية الإسلامية</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">${student.marks.islamic}</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center;">200</td>
+                            </tr>
+                            <tr style="background: linear-gradient(135deg, rgba(10, 25, 47, 0.8), rgba(17, 34, 64, 0.8)); font-weight: bold;">
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: right; color: #64ffda;">المجموع الكلي</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center; color: #64ffda;">${student.total}</td>
+                                <td style="padding: 12px; border: 1px solid rgba(100, 255, 218, 0.2); text-align: center; color: #64ffda;">4300</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div style="background: rgba(17, 34, 64, 0.5); padding: 20px; border-radius: 8px; margin-top: 20px; border-right: 4px solid #64ffda;">
+                        <h4 style="color: #64ffda; margin-bottom: 15px; font-size: 20px;">ملخص النتائج</h4>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px; padding: 8px 0; border-bottom: 1px solid rgba(100, 255, 218, 0.2);">
+                            <span style="font-weight: bold; color: #ccd6f6;">التقدير:</span>
+                            <span style="color: #64ffda; font-weight: 600;">
+                                <span style="display: inline-block; padding: 6px 15px; border-radius: 20px; font-weight: bold; margin-right: 10px; background: ${student.passed ? '#51cf66' : '#ff6b6b'}; color: white;">${student.passed ? 'ناجح' : 'راسب'}</span>
+                                ${student.grade}
+                            </span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px; padding: 8px 0; border-bottom: 1px solid rgba(100, 255, 218, 0.2);">
+                            <span style="font-weight: bold; color: #ccd6f6;">الترتيب بين الطلاب:</span>
+                            <span style="color: #64ffda; font-weight: 600;">${student.rank}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="font-weight: bold; color: #ccd6f6;">النسبة المئوية:</span>
+                            <span style="color: #64ffda; font-weight: 600;">${student.percentage}%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; padding: 20px; background: rgba(17, 34, 64, 0.5); border-radius: 8px; border-right: 4px solid #64ffda; font-weight: bold; color: #ccd6f6;">
+                    ${student.message}
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px; color: #8892b0; font-size: 14px;">
+                    موقع مثنى لنتائج طلاب تقنيات الحاسوب - جميع الحقوق محفوظة © 2025
+                </div>
+            `;
+            
+            document.body.appendChild(tempContainer);
+            
+            // استخدام html2canvas لالتقاط الصورة
+            html2canvas(tempContainer, {
+                scale: 2,
+                useCORS: true,
+                allowTaint: true,
+                logging: false,
+                backgroundColor: null
+            }).then(canvas => {
+                // تحويل canvas إلى صورة
+                const imageData = canvas.toDataURL('image/png');
+                
+                // عرض الصورة
+                resultImage.src = imageData;
+                resultImageContainer.style.display = 'flex';
+                
+                // حفظ رابط الصورة للتحميل
+                window.resultImageData = imageData;
+                
+                // إزالة العنصر المؤقت
+                document.body.removeChild(tempContainer);
+                
+                showNotification('تم إنشاء صورة النتيجة بنجاح');
+            }).catch(error => {
+                console.error('Error creating result image:', error);
+                showNotification('حدث خطأ أثناء إنشاء الصورة');
+                
+                // إزالة العنصر المؤقت في حالة الخطأ
+                document.body.removeChild(tempContainer);
+            });
+        }
+
+        // تحميل صورة النتيجة
+        function downloadResultImage() {
+            if (!window.resultImageData) {
+                showNotification('لا توجد صورة للتحميل');
+                return;
+            }
+            
+            const student = window.currentStudent;
+            const link = document.createElement('a');
+            link.download = `نتيجة-${student.name}-${student.id}.png`;
+            link.href = window.resultImageData;
+            
+            // إضافة الرابط إلى DOM والنقر عليه برمجياً
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showNotification('تم بدء تحميل الصورة');
+        }
+
+        // إخفاء صورة النتيجة
+        function hideResultImage() {
+            if (resultImageContainer) resultImageContainer.style.display = 'none';
+        }
+
+        // تهيئة أولية
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeElements();
+            setupEventListeners();
+            loadTheme();
+            loadData();
+            showResults();
+        });
+    </script>
+</body>
+</html>
